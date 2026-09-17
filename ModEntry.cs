@@ -26,23 +26,23 @@ namespace HaleyCooksForYou
 
         private void OnMenuChanged(object sender, MenuChangedEventArgs e)
         {
-            if (e.NewMenu is DialogueBox && Game1.currentSpeaker?.Name == "Haley" && Game1.player.isSpouse("Haley"))
+            if (e.NewMenu is DialogueBox && Game1.currentSpeaker?.Name == "Haley")
             {
+                if (Game1.player.spouse != "Haley")
+                    return;
+
                 int time = Game1.timeOfDay;
 
-                // Breakfast (6:00 AM - 7:00 AM) -> Fried Egg
                 if (time >= 600 && time <= 700 && !_gaveBreakfast)
                 {
                     _gaveBreakfast = true;
                     GiveMeal("(O)194", "here's your breakfast honey");
                 }
-                // Lunch (1:00 PM - 2:00 PM) -> Pizza
                 else if (time >= 1300 && time <= 1400 && !_gaveLunch)
                 {
                     _gaveLunch = true;
                     GiveMeal("(O)206", "I packed lunch for you");
                 }
-                // Dinner (8:00 PM - 10:00 PM) -> Pizza
                 else if (time >= 2000 && time <= 2200 && !_gaveDinner)
                 {
                     _gaveDinner = true;
@@ -53,7 +53,8 @@ namespace HaleyCooksForYou
 
         private void GiveMeal(string itemId, string message)
         {
-            Game1.player.addItemByMenuIfNecessary(ItemRegistry.Create(itemId));
+            Item meal = ItemRegistry.Create(itemId);
+            Game1.player.addItemByMenuIfNecessary(meal);
             Game1.drawDialogue(Game1.currentSpeaker, message);
         }
     }
