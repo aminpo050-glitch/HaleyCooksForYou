@@ -1,0 +1,9 @@
+{
+  "Name": "Haley Cooks For You",
+  "Author": "Aki",
+  "Version": "1.0.0",
+  "Description": "Haley gives breakfast, lunch, and dinner at specific times.",
+  "UniqueId": "Aki.HaleyCooksForYou",
+  "EntryDll": "HaleyCooksForYou.dll",
+  "MinimumApiVersion": "3.18.0"
+}
